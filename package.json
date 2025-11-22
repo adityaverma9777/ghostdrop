@@ -1,0 +1,13 @@
+{
+  "name": "ghostdrop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "cd backend && npm install && cd ../frontend && npm install",
+    "start": "echo 'Please start backend and frontend in separate terminals'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
