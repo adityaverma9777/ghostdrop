@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import SimplePeer from 'simple-peer'
 import './App.css'
 
-// If we are in production, use the environment variable. If localhost, use port 5000.
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 const socket = io(BACKEND_URL);
 
@@ -16,7 +16,7 @@ function App() {
   
   const myPeer = useRef()
   
-  // Receiver Variables (Refs are better here to avoid re-renders slowing down transfer)
+  
   const receivedChunks = useRef([])
   const receivedSize = useRef(0)
   const fileMeta = useRef(null)
@@ -32,7 +32,7 @@ function App() {
 
         peer.on("connect", () => setStatus("CONNECTED P2P!"))
         
-        // HANDLING INCOMING DATA (Logic Updated)
+        
         peer.on("data", handleIncomingData)
 
         peer.signal(data.signal)
@@ -64,11 +64,10 @@ function App() {
     }
   }, [])
 
-  // --- CORE FILE TRANSFER LOGIC ---
+  
 
   const handleIncomingData = (data) => {
-    // 1. Check if it's the Metadata (Header)
-    // We assume metadata is sent as a JSON string first
+    
     try {
         const str = new TextDecoder().decode(data)
         const json = JSON.parse(str)
@@ -79,22 +78,22 @@ function App() {
             receivedSize.current = 0
             setIsTransferring(true)
             setProgress(0)
-            return // Stop processing, this was just the header
+            return 
         }
     } catch (e) {
-        // Not JSON, so it must be a file chunk
+        
     }
 
-    // 2. Handle Binary Chunks
+    
     if(fileMeta.current) {
         receivedChunks.current.push(data)
         receivedSize.current += data.byteLength
         
-        // Calculate Progress for Receiver
+        
         const percentage = Math.floor((receivedSize.current / fileMeta.current.size) * 100)
         setProgress(percentage)
 
-        // 3. Check if file is complete
+        
         if(receivedSize.current === fileMeta.current.size) {
             downloadFile(receivedChunks.current, fileMeta.current.name)
             resetTransfer()
@@ -108,21 +107,21 @@ function App() {
     setIsTransferring(true)
     setProgress(0)
 
-    // 1. Send Header
+    
     const header = JSON.stringify({ type: 'header', name: file.name, size: file.size })
     myPeer.current.send(header)
 
-    // 2. Read and Send Chunks
-    const chunkSize = 16 * 1024 // 16KB chunks (safe for WebRTC)
+    
+    const chunkSize = 16 * 1024 
     let offset = 0;
 
     const reader = new FileReader();
     
     reader.onload = (e) => {
-        myPeer.current.send(e.target.result) // Send the chunk
+        myPeer.current.send(e.target.result) 
         offset += e.target.result.byteLength
 
-        // Update Sender Progress
+        
         const percentage = Math.floor((offset / file.size) * 100)
         setProgress(percentage)
 
@@ -139,7 +138,7 @@ function App() {
         reader.readAsArrayBuffer(slice)
     }
 
-    readNextChunk() // Start the loop
+    readNextChunk() 
   }
 
   const downloadFile = (chunks, fileName) => {

@@ -1,16 +1,100 @@
-# React + Vite
+👻 GhostDrop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Secure, Serverless, Peer-to-Peer File Sharing.
+GhostDrop allows you to transfer files of any size between devices without storing them on a server. Data streams directly from Peer A to Peer B using WebRTC.
 
-Currently, two official plugins are available:
+🚀 Live Demo: https://ghostdrop-eosin.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✨ Features
 
-## React Compiler
+Peer-to-Peer (P2P): Files go directly from device to device. No server storage means no file size limits.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Real-Time: Instant transfer using WebRTC streams.
 
-## Expanding the ESLint configuration
+Cross-Device: Send files from Mobile to PC, or PC to PC on different networks.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Secure: Data is encrypted in transit and never touches a database.
+
+No Login Required: Just create a room and start sharing.
+
+⚡ How to Use
+
+Open GhostDrop on two devices (e.g., your laptop and your phone).
+
+Join a Room:
+
+Enter a unique Room Name (e.g., RocketLaunch).
+
+Important: Room names are Case Sensitive. rocket and Rocket are different rooms!
+
+Wait for Connection:
+
+Once both devices join, the status will change to "CONNECTED P2P!".
+
+Send File:
+
+Select a file on one device and click "Send".
+
+Watch the progress bar on both screens.
+
+The download will start automatically on the receiving device.
+
+🛠️ Run Locally (For Developers)
+
+Want to run this on your own machine? Follow these steps.
+
+Prerequisites
+
+Node.js installed.
+
+Git installed.
+
+Installation
+
+Clone the repository
+
+git clone [https://github.com/adityaverma9777/ghostdrop.git](https://github.com/adityaverma9777/ghostdrop.git)
+cd ghostdrop
+
+
+Install Dependencies (One-Command)
+We have a monorepo setup. Run this command in the root folder to install libraries for both Backend and Frontend automatically:
+
+npm run setup
+
+
+Running the App
+
+You need to run the Backend and Frontend in two separate terminals.
+
+Terminal 1 (Backend):
+
+cd backend
+npm run dev
+# Server will start on http://localhost:5000
+
+
+Terminal 2 (Frontend):
+
+cd frontend
+npm run dev
+# Client will start on http://localhost:5173
+
+
+🏗️ Tech Stack
+
+Frontend: React + Vite
+
+Styling: CSS3 (Responsive)
+
+Backend: Node.js + Express
+
+Real-Time Signaling: Socket.io
+
+P2P Protocol: WebRTC (via simple-peer)
+
+🤝 Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+Made with ❤️ by Aditya Verma
